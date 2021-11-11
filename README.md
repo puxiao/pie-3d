@@ -14,8 +14,6 @@
 
 **在线预览：** https://puxiao.com/threejs/pie-3d/
 
-<br>
-
 **源码地址：** https://github.com/puxiao/pie-3d/
 
 
