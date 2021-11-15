@@ -27,6 +27,7 @@
 1. 第1条弯路：想通过 Shape 画出各个扇形，然后通过挤压(ExtrudeGeometry) 得到立体的扇形
 
    失败原因：单个扇形是可以画出，但问题是他们之间的坐标 “互相独立且难易理解”，无法拼凑在一起。
+
    > 我怀疑是 Shape、ExtrudeGeometry 他们的坐标、挤压参考系不同才导致结果是“散乱”的，究竟是不是这样，原因未知。
 
 2. 第2条弯路：想通过 CircleGeometry 得到各个扇形，然后通过某种方式让平面的扇形变成立体的
@@ -109,7 +110,7 @@
 
 目前 扇形 + 2 个侧面都是相互独立的，他们对应 3 个 BufferGeometry。
 
-这是因为目前 `RectangleGeometry.ts` 不够完善，没有提供 normal 和 uv 值。
+这是因为目前 `RectangleGeometry.ts` 不够完善，没有提供 normal 和 uv 值，所以目前扇形两侧的面不支持反光材质。
 
 假设日后 RectangleGeometry 完善了，可以提供 normal 和 uv 值，那么我们就可以通过 'three-csg-ts' 这样的库，这样就可以将 扇形和 2 个侧面合并成一个独立的 BBufferGeometry。
 
