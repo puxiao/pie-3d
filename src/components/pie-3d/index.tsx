@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
-import { Color, Group, HemisphereLight, MathUtils, PerspectiveCamera, PointLight, RectAreaLight, Scene, WebGLRenderer } from "three";
+import { Color, Group, HemisphereLight, MathUtils, PerspectiveCamera, PointLight, Scene, WebGLRenderer } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-//import { RectAreaLightHelper } from 'three/examples/jsm/helpers/RectAreaLightHelper'
 import SectorMesh from "./SectorMesh";
 
 export type PieData = {
@@ -73,6 +72,11 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
             item.position.y = ((item as SectorMesh).height - singleMaxHeight) / 2
             console.log(item.position.y)
         })
+        
+        //整体修改(提高)饼图在场景中的 y 坐标，以便确保饼图(的底部)在场景中的位置相对固定
+        sectorGroup.children.forEach((item) => {
+            item.position.y += singleMaxHeight / 2
+        })
 
         //开始添加 Three.js 相关代码
         const canvas = canvasRef.current
@@ -89,13 +93,6 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         const light2 = new PointLight(0xffffff, 2, 100)
         light2.position.set(0, 3, 0)
         scene.add(light2)
-
-        const light3 = new RectAreaLight(0xffffff, 1, 10, 10)
-        light3.position.set(-2, 2, 2)
-        //scene.add(light3)
-
-        // const light3Helper = new RectAreaLightHelper(light3)
-        // scene.add(light3Helper)
 
         scene.add(sectorGroup)
 
