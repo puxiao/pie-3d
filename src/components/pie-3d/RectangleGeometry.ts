@@ -13,7 +13,7 @@ class RectangleGeometry extends BufferGeometry {
 
     private _vertices = new Float32Array()
 
-    //由于本类只是向 BufferGeometry 设置了 position 值，并没有添加 normal 和 uv 值，所以严格意义上并不算一个完整的 BufferGeometry
+    //由于本类只是向 BufferGeometry 设置了 position 值，并没有添加 normal 和 uv 值，导致目前不支持反光材质，所以严格意义上并不算一个完整的 BufferGeometry。
     //对于 normal 和 uv 的备忘录：
     //1、由于是一个平面，所以只需针对任意相邻的两条边进行叉乘，计算出法线 normal，整个平面的全部法线都是这个 normal
     //2、uv 的值其实就是 顶点的 x,y 的值，即 左上角(0,1)、右上角(1,1)、左下角(0,0)、右下角(1,0)
