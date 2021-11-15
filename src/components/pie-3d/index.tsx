@@ -57,9 +57,6 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         let singleMaxHeight = 0 //用于记录单个扇形中的最大高度
         allAngleAndRatio.forEach((item, index) => {
             if (item.ratio === 0) return
-            //const material = new MeshPhongMaterial({ color: data[index].color })
-            //const material = new MeshLambertMaterial({ color: data[index].color, side:DoubleSide })
-            //const material = new MeshBasicMaterial({ color: data[index].color, side: DoubleSide })
             //获取到饼图各个扇形网格
             const currentHeight = item.ratio * maxHeight
             singleMaxHeight = Math.max(singleMaxHeight, currentHeight)
@@ -70,7 +67,6 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         //有个各个扇形的高度并不相同，因此需要调整扇形的位置(y值)，以便它们底部对齐
         sectorGroup.children.forEach((item) => {
             item.position.y = ((item as SectorMesh).height - singleMaxHeight) / 2
-            console.log(item.position.y)
         })
         
         //整体修改(提高)饼图在场景中的 y 坐标，以便确保饼图(的底部)在场景中的位置相对固定
@@ -85,7 +81,7 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         const scene = new Scene()
         scene.background = new Color(0x666666)
         const camera = new PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000)
-        camera.position.set(0, 0, 3)
+        camera.position.set(0, 1, 2)
 
         const light = new HemisphereLight(0x333333, 0x333333, 2)
         scene.add(light)
