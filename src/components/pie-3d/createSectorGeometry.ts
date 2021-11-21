@@ -1,6 +1,7 @@
 import { CylinderGeometry, Vector3 } from "three";
 import RectangleGeometry from "./RectangleGeometry";
 
+//创建一个扇形的几何体集合(扇面 + 两侧)
 const createSectorGeometry = (radius: number, height: number, radialSegments: number, heightSegments: number, openEnded: boolean, thetaStart: number, thetaLength: number): [CylinderGeometry, RectangleGeometry, RectangleGeometry] => {
     //先创建一个临时的扇形(圆柱体)，请注意一定要设置 radialSegments 和 heightSegments 的值都为 1
     const tempCylinder = new CylinderGeometry(radius, radius, height, 1, 1, openEnded, thetaStart, thetaLength)
@@ -37,9 +38,8 @@ const createSectorGeometry = (radius: number, height: number, radialSegments: nu
     return [cylinder, oneSide, otherSide]
 
     //日后可完善的地方：
-    //由于目前 RectangleGeometry 中没有添加 normal 和 uv 值，所以我们只能被迫返回 3 个 BufferGeometry
-    //假设日后 RectangleGeometry 完善了功能，提供 normal 和 uv 值，那么我们就可以通过 'three-csg-ts' 这样的库
-    //将 3 个 BufferGeometry 合并成一个 BufferGeometry，这样就可以返回一个 BufferGeometry
+    //原本想通过 'three-csg-ts' 这样的库，将 3 个 BufferGeometry 合并成一个 BufferGeometry，这样就可以返回一个 BufferGeometry
+    //但是经过实际测试，发现通过使用 CSG.union() 合并后的对象不包含扇形主体，只显示了扇形两侧，具体原因日后查明再做处理
 }
 
 export default createSectorGeometry

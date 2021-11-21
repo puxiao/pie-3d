@@ -1,4 +1,4 @@
-import { Color, CylinderBufferGeometry, DoubleSide, Mesh, MeshBasicMaterial, MeshPhongMaterial, Object3D } from "three";
+import { Color, CylinderBufferGeometry, DoubleSide, Mesh, MeshPhongMaterial, Object3D } from "three";
 import createSectorGeometry from "./createSectorGeometry";
 import RectangleGeometry from "./RectangleGeometry";
 
@@ -24,7 +24,8 @@ class SectorMesh extends Object3D {
         }
 
         const cylinderMaterial = new MeshPhongMaterial({ color: this._color })
-        const sideMaterial = new MeshBasicMaterial({ color: this._color, side: DoubleSide })
+        const sideMaterial = cylinderMaterial.clone()
+        sideMaterial.side = DoubleSide
         this.geometries.forEach((geometry, index) => {
             if (index === 0) {
                 this.add(new Mesh(geometry, cylinderMaterial))

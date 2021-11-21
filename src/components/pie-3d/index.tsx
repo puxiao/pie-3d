@@ -3,11 +3,13 @@ import { Color, Group, HemisphereLight, MathUtils, PerspectiveCamera, PointLight
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import SectorMesh from "./SectorMesh";
 
-export type PieData = {
+export interface PieItemData {
     name: string,
     value: number,
     color: string
-}[]
+}
+
+export type PieData = PieItemData[]
 
 export interface Pie3DProps {
     data: PieData,
@@ -68,7 +70,7 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         sectorGroup.children.forEach((item) => {
             item.position.y = ((item as SectorMesh).height - singleMaxHeight) / 2
         })
-        
+
         //整体修改(提高)饼图在场景中的 y 坐标，以便确保饼图(的底部)在场景中的位置相对固定
         sectorGroup.children.forEach((item) => {
             item.position.y += singleMaxHeight / 2
@@ -83,11 +85,11 @@ const Pie3D: React.FC<Pie3DProps> = ({ data, radius, height }) => {
         const camera = new PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000)
         camera.position.set(0, 1, 2)
 
-        const light = new HemisphereLight(0x333333, 0x333333, 2)
+        const light = new HemisphereLight(0x999999, 0x333333, 2)
         scene.add(light)
 
         const light2 = new PointLight(0xffffff, 2, 100)
-        light2.position.set(0, 3, 0)
+        light2.position.set(0, 2, 0)
         scene.add(light2)
 
         scene.add(sectorGroup)

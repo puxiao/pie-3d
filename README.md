@@ -80,6 +80,8 @@
 
 6. 第6步：依次将这 2 组顶点坐标通过 'RectangleGeometry.ts' 得到对应的 “侧面”
 
+   > 在 RectangleGeometry.ts 中除了 position 外还增加了 normal 和 uv 的值，这样侧面也可以支持反光和纹理贴图
+
 7. 第7步：创建出真正的扇形(圆柱体)
 
    > 这个真正的扇形 与第1步中的 临时扇形主要区别在于 radialSegments 和 heightSegments 的值
@@ -110,9 +112,7 @@
 
 目前 扇形 + 2 个侧面都是相互独立的，他们对应 3 个 BufferGeometry。
 
-这是因为目前 `RectangleGeometry.ts` 不够完善，没有提供 normal 和 uv 值，所以目前扇形两侧的面不支持反光材质。
-
-假设日后 RectangleGeometry 完善了，可以提供 normal 和 uv 值，那么我们就可以通过 'three-csg-ts' 这样的库，这样就可以将 扇形和 2 个侧面合并成一个独立的 BBufferGeometry。
+原本想通过 'three-csg-ts' 这样的库，将 3 个 BufferGeometry 合并成一个 BufferGeometry，这样就可以返回一个 BufferGeometry，但是经过实际测试，发现通过使用 CSG.union() 合并后的对象不包含扇形主体，只显示了扇形两侧，具体原因日后查明再做处理。
 
 
 
