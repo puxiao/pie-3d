@@ -44,6 +44,7 @@ function App() {
                 <DatNumber path='green.value' label='Green' min={0} max={100} step={1} />
                 <DatNumber path='yellow.value' label='Yellow' min={0} max={100} step={1} />
             </DatGui>
+            <div style={{margin:'20px 0 0 20px'}}>source code: <a href="https://github.com/puxiao/pie-3d" >https://github.com/puxiao/pie-3d</a></div>
         </Fragment>
     )
 }

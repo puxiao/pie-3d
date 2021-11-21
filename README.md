@@ -10,7 +10,7 @@
 
 <br>
 
-![pie-3d](https://puxiao.com/temp/pie_3d_thumb.jpg)
+![pie-3d](https://puxiao.com/temp/pie_3d.jpg)
 
 **在线预览：** https://puxiao.com/threejs/pie-3d/
 
